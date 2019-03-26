@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-ward-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">病房编号：</label>
+				<div class="col-sm-8">
+					<input id="wardNo" name="wardNo" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">病房名称：</label>
+				<div class="col-sm-8">
+					<input id="wardName" name="wardName" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">所属科室编号：</label>
+				<div class="col-sm-8">
+					<input id="mdNo" name="mdNo" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">所属科室名称：</label>
+				<div class="col-sm-8">
+					<input id="mdName" name="mdName" class="form-control" type="text">
+				</div>
+			</div>
+
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">备注：</label>
+				<div class="col-sm-8">
+					<input id="remark" name="remark" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/ward"
+		$("#form-ward-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-ward-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

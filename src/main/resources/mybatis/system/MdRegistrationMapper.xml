@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.mdRegistration.mapper.MdRegistrationMapper">
+    
+    <resultMap type="MdRegistration" id="MdRegistrationResult">
+        <result property="id"    column="id"    />
+        <result property="mdNo"    column="MD_NO"    />
+        <result property="mdName"    column="MD_NAME"    />
+        <result property="currDate"    column="CURR_DATE"    />
+        <result property="registrationPool"    column="REGISTRATION_POOL"    />
+        <result property="currMaxNum"    column="CURR_MAX_NUM"    />
+        <result property="hasNum"    column="HAS_NUM"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectMdRegistrationVo">
+        select id, MD_NO, MD_NAME, CURR_DATE, REGISTRATION_POOL, CURR_MAX_NUM, HAS_NUM, status, CREATE_TIME, UPDATE_TIME, remark from t_md_registration
+    </sql>
+	
+    <select id="selectMdRegistrationList" parameterType="MdRegistration" resultMap="MdRegistrationResult">
+        <include refid="selectMdRegistrationVo"/>
+        <where>  
+
+             <if test="mdNo != null  and mdNo != '' "> and MD_NO = #{mdNo}</if>
+             <if test="mdName != null  and mdName != '' "> and MD_NAME = #{mdName}</if>
+             <if test="currDate != null "> and CURR_DATE = #{currDate}</if>
+             <if test="registrationPool != null  and registrationPool != '' "> and REGISTRATION_POOL = #{registrationPool}</if>
+             <if test="currMaxNum != null "> and CURR_MAX_NUM = #{currMaxNum}</if>
+             <if test="hasNum != null "> and HAS_NUM = #{hasNum}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectMdRegistrationById" parameterType="String" resultMap="MdRegistrationResult">
+        <include refid="selectMdRegistrationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMdRegistration" parameterType="MdRegistration">
+        insert into t_md_registration
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="mdNo != null  and mdNo != ''  ">MD_NO,</if>
+			<if test="mdName != null  and mdName != ''  ">MD_NAME,</if>
+			<if test="currDate != null  ">CURR_DATE,</if>
+			<if test="registrationPool != null  and registrationPool != ''  ">REGISTRATION_POOL,</if>
+			<if test="currMaxNum != null  ">CURR_MAX_NUM,</if>
+			<if test="hasNum != null  ">HAS_NUM,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="mdNo != null  and mdNo != ''  ">#{mdNo},</if>
+			<if test="mdName != null  and mdName != ''  ">#{mdName},</if>
+			<if test="currDate != null  ">#{currDate},</if>
+			<if test="registrationPool != null  and registrationPool != ''  ">#{registrationPool},</if>
+			<if test="currMaxNum != null  ">#{currMaxNum},</if>
+			<if test="hasNum != null  ">#{hasNum},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateMdRegistration" parameterType="MdRegistration">
+        update t_md_registration
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mdNo != null  and mdNo != ''  ">MD_NO = #{mdNo},</if>
+            <if test="mdName != null  and mdName != ''  ">MD_NAME = #{mdName},</if>
+            <if test="currDate != null  ">CURR_DATE = #{currDate},</if>
+            <if test="registrationPool != null  and registrationPool != ''  ">REGISTRATION_POOL = #{registrationPool},</if>
+            <if test="currMaxNum != null  ">CURR_MAX_NUM = #{currMaxNum},</if>
+            <if test="hasNum != null  ">HAS_NUM = #{hasNum},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteMdRegistrationById" parameterType="String">
+        delete from t_md_registration where id = #{id}
+    </delete>
+	
+    <delete id="deleteMdRegistrationByIds" parameterType="String">
+        delete from t_md_registration where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.deptMedicaldept.mapper.DeptMedicaldeptMapper">
+    
+    <resultMap type="DeptMedicaldept" id="DeptMedicaldeptResult">
+        <result property="id"    column="id"    />
+        <result property="deptId"    column="DEPT_id"    />
+        <result property="medicaldeptId"    column="MEDICALDEPT_id"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+    </resultMap>
+	
+	<sql id="selectDeptMedicaldeptVo">
+        select id, DEPT_id, MEDICALDEPT_id, CREATE_TIME, UPDATE_TIME from t_dept_medicaldept
+    </sql>
+	
+    <select id="selectDeptMedicaldeptList" parameterType="DeptMedicaldept" resultMap="DeptMedicaldeptResult">
+        <include refid="selectDeptMedicaldeptVo"/>
+        <where>  
+
+             <if test="deptId != null  and deptId != '' "> and DEPT_id = #{deptId}</if>
+             <if test="medicaldeptId != null  and medicaldeptId != '' "> and MEDICALDEPT_id = #{medicaldeptId}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectDeptMedicaldeptById" parameterType="String" resultMap="DeptMedicaldeptResult">
+        <include refid="selectDeptMedicaldeptVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDeptMedicaldept" parameterType="DeptMedicaldept">
+        insert into t_dept_medicaldept
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="deptId != null  and deptId != ''  ">DEPT_id,</if>
+			<if test="medicaldeptId != null  and medicaldeptId != ''  ">MEDICALDEPT_id,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="deptId != null  and deptId != ''  ">#{deptId},</if>
+			<if test="medicaldeptId != null  and medicaldeptId != ''  ">#{medicaldeptId},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateDeptMedicaldept" parameterType="DeptMedicaldept">
+        update t_dept_medicaldept
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptId != null  and deptId != ''  ">DEPT_id = #{deptId},</if>
+            <if test="medicaldeptId != null  and medicaldeptId != ''  ">MEDICALDEPT_id = #{medicaldeptId},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteDeptMedicaldeptById" parameterType="String">
+        delete from t_dept_medicaldept where id = #{id}
+    </delete>
+	
+    <delete id="deleteDeptMedicaldeptByIds" parameterType="String">
+        delete from t_dept_medicaldept where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

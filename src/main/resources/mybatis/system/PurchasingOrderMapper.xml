@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.purchasingOrder.mapper.PurchasingOrderMapper">
+    
+    <resultMap type="PurchasingOrder" id="PurchasingOrderResult">
+        <result property="orderNo"    column="ORDER_NO"    />
+        <result property="purshInDeptId"    column="PURSH_IN_DEPT_ID"    />
+        <result property="purshInDeptName"    column="PURSH_IN_DEPT_NAME"    />
+        <result property="supplierId"    column="SUPPLIER_ID"    />
+        <result property="supplierName"    column="SUPPLIER_NAME"    />
+        <result property="totalAmount"    column="TOTAL_AMOUNT"    />
+        <result property="orderState"    column="ORDER_STATE"    />
+        <result property="purchasingBy"    column="PURCHASING_BY"    />
+        <result property="auditBy"    column="AUDIT_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="REMARK"    />
+    </resultMap>
+	
+	<sql id="selectPurchasingOrderVo">
+        select ORDER_NO, PURSH_IN_DEPT_ID, PURSH_IN_DEPT_NAME, SUPPLIER_ID, SUPPLIER_NAME, TOTAL_AMOUNT, ORDER_STATE, PURCHASING_BY, AUDIT_BY, CREATE_TIME, UPDATE_TIME, REMARK from t_purchasing_order
+    </sql>
+	
+    <select id="selectPurchasingOrderList" parameterType="PurchasingOrder" resultMap="PurchasingOrderResult">
+        <include refid="selectPurchasingOrderVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != '' "> and ORDER_NO = #{orderNo}</if>
+             <if test="purshInDeptId != null  and purshInDeptId != '' "> and PURSH_IN_DEPT_ID = #{purshInDeptId}</if>
+             <if test="purshInDeptName != null  and purshInDeptName != '' "> and PURSH_IN_DEPT_NAME = #{purshInDeptName}</if>
+             <if test="supplierId != null  and supplierId != '' "> and SUPPLIER_ID = #{supplierId}</if>
+             <if test="supplierName != null  and supplierName != '' "> and SUPPLIER_NAME = #{supplierName}</if>
+             <if test="totalAmount != null "> and TOTAL_AMOUNT = #{totalAmount}</if>
+             <if test="orderState != null  and orderState != '' "> and ORDER_STATE = #{orderState}</if>
+             <if test="purchasingBy != null  and purchasingBy != '' "> and PURCHASING_BY = #{purchasingBy}</if>
+             <if test="auditBy != null  and auditBy != '' "> and AUDIT_BY = #{auditBy}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and REMARK = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectPurchasingOrderById" parameterType="String" resultMap="PurchasingOrderResult">
+        <include refid="selectPurchasingOrderVo"/>
+        where ORDER_NO = #{orderNo}
+    </select>
+        
+    <insert id="insertPurchasingOrder" parameterType="PurchasingOrder">
+        insert into t_purchasing_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">ORDER_NO,</if>
+			<if test="purshInDeptId != null  and purshInDeptId != ''  ">PURSH_IN_DEPT_ID,</if>
+			<if test="purshInDeptName != null  and purshInDeptName != ''  ">PURSH_IN_DEPT_NAME,</if>
+			<if test="supplierId != null  and supplierId != ''  ">SUPPLIER_ID,</if>
+			<if test="supplierName != null  and supplierName != ''  ">SUPPLIER_NAME,</if>
+			<if test="totalAmount != null  ">TOTAL_AMOUNT,</if>
+			<if test="orderState != null  and orderState != ''  ">ORDER_STATE,</if>
+			<if test="purchasingBy != null  and purchasingBy != ''  ">PURCHASING_BY,</if>
+			<if test="auditBy != null  and auditBy != ''  ">AUDIT_BY,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">REMARK,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">#{orderNo},</if>
+			<if test="purshInDeptId != null  and purshInDeptId != ''  ">#{purshInDeptId},</if>
+			<if test="purshInDeptName != null  and purshInDeptName != ''  ">#{purshInDeptName},</if>
+			<if test="supplierId != null  and supplierId != ''  ">#{supplierId},</if>
+			<if test="supplierName != null  and supplierName != ''  ">#{supplierName},</if>
+			<if test="totalAmount != null  ">#{totalAmount},</if>
+			<if test="orderState != null  and orderState != ''  ">#{orderState},</if>
+			<if test="purchasingBy != null  and purchasingBy != ''  ">#{purchasingBy},</if>
+			<if test="auditBy != null  and auditBy != ''  ">#{auditBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePurchasingOrder" parameterType="PurchasingOrder">
+        update t_purchasing_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="purshInDeptId != null  and purshInDeptId != ''  ">PURSH_IN_DEPT_ID = #{purshInDeptId},</if>
+            <if test="purshInDeptName != null  and purshInDeptName != ''  ">PURSH_IN_DEPT_NAME = #{purshInDeptName},</if>
+            <if test="supplierId != null  and supplierId != ''  ">SUPPLIER_ID = #{supplierId},</if>
+            <if test="supplierName != null  and supplierName != ''  ">SUPPLIER_NAME = #{supplierName},</if>
+            <if test="totalAmount != null  ">TOTAL_AMOUNT = #{totalAmount},</if>
+            <if test="orderState != null  and orderState != ''  ">ORDER_STATE = #{orderState},</if>
+            <if test="purchasingBy != null  and purchasingBy != ''  ">PURCHASING_BY = #{purchasingBy},</if>
+            <if test="auditBy != null  and auditBy != ''  ">AUDIT_BY = #{auditBy},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">REMARK = #{remark},</if>
+        </trim>
+        where ORDER_NO = #{orderNo}
+    </update>
+
+	<delete id="deletePurchasingOrderById" parameterType="String">
+        delete from t_purchasing_order where ORDER_NO = #{orderNo}
+    </delete>
+	
+    <delete id="deletePurchasingOrderByIds" parameterType="String">
+        delete from t_purchasing_order where ORDER_NO in 
+        <foreach item="orderNo" collection="array" open="(" separator="," close=")">
+            #{orderNo}
+        </foreach>
+    </delete>
+    
+</mapper>

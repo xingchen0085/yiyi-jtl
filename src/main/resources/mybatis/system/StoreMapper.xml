@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.store.mapper.StoreMapper">
+    
+    <resultMap type="Store" id="StoreResult">
+        <result property="id"    column="id"    />
+        <result property="stNo"    column="ST_NO"    />
+        <result property="stName"    column="ST_NAME"    />
+        <result property="stAddr"    column="ST_ADDR"    />
+        <result property="stTypeNo"    column="ST_TYPE_NO"    />
+        <result property="stTypeName"    column="ST_TYPE_NAME"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectStoreVo">
+        select id, ST_NO, ST_NAME, ST_ADDR, ST_TYPE_NO, ST_TYPE_NAME, status, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from t_store
+    </sql>
+	
+    <select id="selectStoreList" parameterType="Store" resultMap="StoreResult">
+        <include refid="selectStoreVo"/>
+        <where>  
+
+             <if test="stNo != null  and stNo != '' "> and ST_NO = #{stNo}</if>
+             <if test="stName != null  and stName != '' "> and ST_NAME = #{stName}</if>
+             <if test="stAddr != null  and stAddr != '' "> and ST_ADDR = #{stAddr}</if>
+             <if test="stTypeNo != null  and stTypeNo != '' "> and ST_TYPE_NO = #{stTypeNo}</if>
+             <if test="stTypeName != null  and stTypeName != '' "> and ST_TYPE_NAME = #{stTypeName}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="createBy != null  and createBy != '' "> and CREATE_BY = #{createBy}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateBy != null  and updateBy != '' "> and UPDATE_BY = #{updateBy}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectStoreById" parameterType="String" resultMap="StoreResult">
+        <include refid="selectStoreVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStore" parameterType="Store">
+        insert into t_store
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="stNo != null  and stNo != ''  ">ST_NO,</if>
+			<if test="stName != null  and stName != ''  ">ST_NAME,</if>
+			<if test="stAddr != null  and stAddr != ''  ">ST_ADDR,</if>
+			<if test="stTypeNo != null  and stTypeNo != ''  ">ST_TYPE_NO,</if>
+			<if test="stTypeName != null  and stTypeName != ''  ">ST_TYPE_NAME,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="createBy != null  and createBy != ''  ">CREATE_BY,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateBy != null  and updateBy != ''  ">UPDATE_BY,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="stNo != null  and stNo != ''  ">#{stNo},</if>
+			<if test="stName != null  and stName != ''  ">#{stName},</if>
+			<if test="stAddr != null  and stAddr != ''  ">#{stAddr},</if>
+			<if test="stTypeNo != null  and stTypeNo != ''  ">#{stTypeNo},</if>
+			<if test="stTypeName != null  and stTypeName != ''  ">#{stTypeName},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="createBy != null  and createBy != ''  ">#{createBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateBy != null  and updateBy != ''  ">#{updateBy},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateStore" parameterType="Store">
+        update t_store
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stNo != null  and stNo != ''  ">ST_NO = #{stNo},</if>
+            <if test="stName != null  and stName != ''  ">ST_NAME = #{stName},</if>
+            <if test="stAddr != null  and stAddr != ''  ">ST_ADDR = #{stAddr},</if>
+            <if test="stTypeNo != null  and stTypeNo != ''  ">ST_TYPE_NO = #{stTypeNo},</if>
+            <if test="stTypeName != null  and stTypeName != ''  ">ST_TYPE_NAME = #{stTypeName},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''  ">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''  ">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteStoreById" parameterType="String">
+        delete from t_store where id = #{id}
+    </delete>
+	
+    <delete id="deleteStoreByIds" parameterType="String">
+        delete from t_store where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

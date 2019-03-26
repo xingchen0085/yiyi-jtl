@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.sellOrder.mapper.SellOrderMapper">
+    
+    <resultMap type="SellOrder" id="SellOrderResult">
+        <result property="orderNo"    column="ORDER_NO"    />
+        <result property="sellDeptId"    column="SELL_DEPT_ID"    />
+        <result property="sellDeptName"    column="SELL_DEPT_NAME"    />
+        <result property="totalAmount"    column="TOTAL_AMOUNT"    />
+        <result property="orderState"    column="ORDER_STATE"    />
+        <result property="buyBy"    column="BUY_BY"    />
+        <result property="auditBy"    column="AUDIT_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectSellOrderVo">
+        select ORDER_NO, SELL_DEPT_ID, SELL_DEPT_NAME, TOTAL_AMOUNT, ORDER_STATE, BUY_BY, AUDIT_BY, CREATE_TIME, UPDATE_TIME, remark from t_sell_order
+    </sql>
+	
+    <select id="selectSellOrderList" parameterType="SellOrder" resultMap="SellOrderResult">
+        <include refid="selectSellOrderVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != '' "> and ORDER_NO = #{orderNo}</if>
+             <if test="sellDeptId != null  and sellDeptId != '' "> and SELL_DEPT_ID = #{sellDeptId}</if>
+             <if test="sellDeptName != null  and sellDeptName != '' "> and SELL_DEPT_NAME = #{sellDeptName}</if>
+             <if test="totalAmount != null "> and TOTAL_AMOUNT = #{totalAmount}</if>
+             <if test="orderState != null  and orderState != '' "> and ORDER_STATE = #{orderState}</if>
+             <if test="buyBy != null  and buyBy != '' "> and BUY_BY = #{buyBy}</if>
+             <if test="auditBy != null  and auditBy != '' "> and AUDIT_BY = #{auditBy}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectSellOrderById" parameterType="String" resultMap="SellOrderResult">
+        <include refid="selectSellOrderVo"/>
+        where ORDER_NO = #{orderNo}
+    </select>
+        
+    <insert id="insertSellOrder" parameterType="SellOrder">
+        insert into t_sell_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">ORDER_NO,</if>
+			<if test="sellDeptId != null  and sellDeptId != ''  ">SELL_DEPT_ID,</if>
+			<if test="sellDeptName != null  and sellDeptName != ''  ">SELL_DEPT_NAME,</if>
+			<if test="totalAmount != null  ">TOTAL_AMOUNT,</if>
+			<if test="orderState != null  and orderState != ''  ">ORDER_STATE,</if>
+			<if test="buyBy != null  and buyBy != ''  ">BUY_BY,</if>
+			<if test="auditBy != null  and auditBy != ''  ">AUDIT_BY,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">#{orderNo},</if>
+			<if test="sellDeptId != null  and sellDeptId != ''  ">#{sellDeptId},</if>
+			<if test="sellDeptName != null  and sellDeptName != ''  ">#{sellDeptName},</if>
+			<if test="totalAmount != null  ">#{totalAmount},</if>
+			<if test="orderState != null  and orderState != ''  ">#{orderState},</if>
+			<if test="buyBy != null  and buyBy != ''  ">#{buyBy},</if>
+			<if test="auditBy != null  and auditBy != ''  ">#{auditBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateSellOrder" parameterType="SellOrder">
+        update t_sell_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sellDeptId != null  and sellDeptId != ''  ">SELL_DEPT_ID = #{sellDeptId},</if>
+            <if test="sellDeptName != null  and sellDeptName != ''  ">SELL_DEPT_NAME = #{sellDeptName},</if>
+            <if test="totalAmount != null  ">TOTAL_AMOUNT = #{totalAmount},</if>
+            <if test="orderState != null  and orderState != ''  ">ORDER_STATE = #{orderState},</if>
+            <if test="buyBy != null  and buyBy != ''  ">BUY_BY = #{buyBy},</if>
+            <if test="auditBy != null  and auditBy != ''  ">AUDIT_BY = #{auditBy},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where ORDER_NO = #{orderNo}
+    </update>
+
+	<delete id="deleteSellOrderById" parameterType="String">
+        delete from t_sell_order where ORDER_NO = #{orderNo}
+    </delete>
+	
+    <delete id="deleteSellOrderByIds" parameterType="String">
+        delete from t_sell_order where ORDER_NO in 
+        <foreach item="orderNo" collection="array" open="(" separator="," close=")">
+            #{orderNo}
+        </foreach>
+    </delete>
+    
+</mapper>

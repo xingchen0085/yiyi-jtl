@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="/shop/nav::header"></head>
+	<body>
+		<!-------------------login-------------------------->
+		<div class="login">
+			<form action="/shop/doLogin" method="post">
+				<h1><a href="/shop/index"><img src="/shop/img/temp/logo.png"></a></h1>
+				<p></p>
+				<div class="msg-warn hide"><b th:text="${error}">欢迎使用易医医药互联平台</b></div>
+				<p><input type="text" name="username" value="" placeholder="账号"></p>
+				<p><input type="password" name="password" value="" placeholder="密码"></p>
+				<p><input type="submit" name="" value="登  录"></p>
+				<p class="txt"><a class="" href="/shop/reg">免费注册</a><a href="/shop/forget">忘记密码？</a></p>
+			</form>
+		</div>
+		
+	</body>
+</html>

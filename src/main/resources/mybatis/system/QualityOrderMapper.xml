@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.qualityOrder.mapper.QualityOrderMapper">
+    
+    <resultMap type="QualityOrder" id="QualityOrderResult">
+        <result property="orderNo"    column="ORDER_NO"    />
+        <result property="orderType"    column="ORDER_TYPE"    />
+        <result property="totalAmount"    column="TOTAL_AMOUNT"    />
+        <result property="orderState"    column="ORDER_STATE"    />
+        <result property="purchasingBy"    column="PURCHASING_BY"    />
+        <result property="auditBy"    column="AUDIT_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectQualityOrderVo">
+        select ORDER_NO, ORDER_TYPE, TOTAL_AMOUNT, ORDER_STATE, PURCHASING_BY, AUDIT_BY, CREATE_TIME, UPDATE_TIME, remark from t_quality_order
+    </sql>
+	
+    <select id="selectQualityOrderList" parameterType="QualityOrder" resultMap="QualityOrderResult">
+        <include refid="selectQualityOrderVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != '' "> and ORDER_NO = #{orderNo}</if>
+             <if test="orderType != null  and orderType != '' "> and ORDER_TYPE = #{orderType}</if>
+             <if test="totalAmount != null "> and TOTAL_AMOUNT = #{totalAmount}</if>
+             <if test="orderState != null  and orderState != '' "> and ORDER_STATE = #{orderState}</if>
+             <if test="purchasingBy != null  and purchasingBy != '' "> and PURCHASING_BY = #{purchasingBy}</if>
+             <if test="auditBy != null  and auditBy != '' "> and AUDIT_BY = #{auditBy}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectQualityOrderById" parameterType="String" resultMap="QualityOrderResult">
+        <include refid="selectQualityOrderVo"/>
+        where ORDER_NO = #{orderNo}
+    </select>
+        
+    <insert id="insertQualityOrder" parameterType="QualityOrder">
+        insert into t_quality_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">ORDER_NO,</if>
+			<if test="orderType != null  and orderType != ''  ">ORDER_TYPE,</if>
+			<if test="totalAmount != null  ">TOTAL_AMOUNT,</if>
+			<if test="orderState != null  and orderState != ''  ">ORDER_STATE,</if>
+			<if test="purchasingBy != null  and purchasingBy != ''  ">PURCHASING_BY,</if>
+			<if test="auditBy != null  and auditBy != ''  ">AUDIT_BY,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderNo != null  and orderNo != ''  ">#{orderNo},</if>
+			<if test="orderType != null  and orderType != ''  ">#{orderType},</if>
+			<if test="totalAmount != null  ">#{totalAmount},</if>
+			<if test="orderState != null  and orderState != ''  ">#{orderState},</if>
+			<if test="purchasingBy != null  and purchasingBy != ''  ">#{purchasingBy},</if>
+			<if test="auditBy != null  and auditBy != ''  ">#{auditBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateQualityOrder" parameterType="QualityOrder">
+        update t_quality_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderType != null  and orderType != ''  ">ORDER_TYPE = #{orderType},</if>
+            <if test="totalAmount != null  ">TOTAL_AMOUNT = #{totalAmount},</if>
+            <if test="orderState != null  and orderState != ''  ">ORDER_STATE = #{orderState},</if>
+            <if test="purchasingBy != null  and purchasingBy != ''  ">PURCHASING_BY = #{purchasingBy},</if>
+            <if test="auditBy != null  and auditBy != ''  ">AUDIT_BY = #{auditBy},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>EE
+        where ORDER_NO = #{orderNo}
+    </update>
+
+	<delete id="deleteQualityOrderById" parameterType="String">
+        delete from t_quality_order where ORDER_NO = #{orderNo}
+    </delete>
+	
+    <delete id="deleteQualityOrderByIds" parameterType="String">
+        delete from t_quality_order where ORDER_NO in 
+        <foreach item="orderNo" collection="array" open="(" separator="," close=")">
+            #{orderNo}
+        </foreach>
+    </delete>
+    
+</mapper>

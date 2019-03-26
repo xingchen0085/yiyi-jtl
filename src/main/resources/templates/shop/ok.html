@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="/shop/nav::header"></head>
+<body>
+<!------------------------------head------------------------------>
+<div th:include="/shop/nav :: nav"></div>
+		<div class="order mt cart">
+			<div class="site">
+				<p class="wrapper clearfix">
+					<span class="fl">支付成功</span>
+					<img class="top" th:src="@{/shop/img/temp/cartTop03.png">
+				</p>
+			</div>
+			<p class="ok">支付成功！剩余<span>5</span>秒<a href="/shop/myorderq">返回订单页</a></p>
+		</div>
+		<div class="like">
+			<h4>猜你喜欢</h4>
+			<div class="bottom">
+				<div class="hd">
+					<span class="prev"><img src="/shop/img/temp/prev.png"></span>
+					<span class="next"><img src="/shop/img/temp/next.png"></span>
+				</div>
+				<div class="imgCon wrapper bd">
+					<div class="likeList clearfix">
+						<div>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like01.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like02.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like03.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like04.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html" class="last">
+								<dl>
+									<dt><img src="/shop/img/temp/like05.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+						</div>
+						<div>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like01.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like02.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like03.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html">
+								<dl>
+									<dt><img src="/shop/img/temp/like04.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+							<a href="proDetail.html" class="last">
+								<dl>
+									<dt><img src="/shop/img/temp/like05.jpg"></dt>
+									<dd>【最家】复古文艺风玻璃花瓶</dd>
+									<dd>￥193.20</dd>
+								</dl>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:include="/shop/nav :: footer"></div>
+
+		<script type="text/javascript">
+			jQuery(".bottom").slide({titCell:".hd ul",mainCell:".bd .likeList",autoPage:true,autoPlay:false,effect:"leftLoop",autoPlay:true,vis:1});
+		</script>
+	</body>
+</html>

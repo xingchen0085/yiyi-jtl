@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.qualityOrderDetail.mapper.QualityOrderDetailMapper">
+    
+    <resultMap type="QualityOrderDetail" id="QualityOrderDetailResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="ORDER_NO"    />
+        <result property="goodsNo"    column="GOODS_NO"    />
+        <result property="goodsName"    column="GOODS_NAME"    />
+        <result property="amount"    column="amount"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectQualityOrderDetailVo">
+        select id, ORDER_NO, GOODS_NO, GOODS_NAME, amount, CREATE_TIME, UPDATE_TIME, remark from t_quality_order_detail
+    </sql>
+	
+    <select id="selectQualityOrderDetailList" parameterType="QualityOrderDetail" resultMap="QualityOrderDetailResult">
+        <include refid="selectQualityOrderDetailVo"/>
+        <where>  
+
+             <if test="orderNo != null  and orderNo != '' "> and ORDER_NO = #{orderNo}</if>
+             <if test="goodsNo != null  and goodsNo != '' "> and GOODS_NO = #{goodsNo}</if>
+             <if test="goodsName != null  and goodsName != '' "> and GOODS_NAME = #{goodsName}</if>
+             <if test="amount != null "> and amount = #{amount}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectQualityOrderDetailById" parameterType="String" resultMap="QualityOrderDetailResult">
+        <include refid="selectQualityOrderDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQualityOrderDetail" parameterType="QualityOrderDetail">
+        insert into t_quality_order_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="orderNo != null  and orderNo != ''  ">ORDER_NO,</if>
+			<if test="goodsNo != null  and goodsNo != ''  ">GOODS_NO,</if>
+			<if test="goodsName != null  and goodsName != ''  ">GOODS_NAME,</if>
+			<if test="amount != null  ">amount,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="orderNo != null  and orderNo != ''  ">#{orderNo},</if>
+			<if test="goodsNo != null  and goodsNo != ''  ">#{goodsNo},</if>
+			<if test="goodsName != null  and goodsName != ''  ">#{goodsName},</if>
+			<if test="amount != null  ">#{amount},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateQualityOrderDetail" parameterType="QualityOrderDetail">
+        update t_quality_order_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''  ">ORDER_NO = #{orderNo},</if>
+            <if test="goodsNo != null  and goodsNo != ''  ">GOODS_NO = #{goodsNo},</if>
+            <if test="goodsName != null  and goodsName != ''  ">GOODS_NAME = #{goodsName},</if>
+            <if test="amount != null  ">amount = #{amount},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteQualityOrderDetailById" parameterType="String">
+        delete from t_quality_order_detail where id = #{id}
+    </delete>
+	
+    <delete id="deleteQualityOrderDetailByIds" parameterType="String">
+        delete from t_quality_order_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

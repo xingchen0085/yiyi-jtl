@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhku.yiyi.project.system.staff.mapper.StaffMapper">
+    
+    <resultMap type="Staff" id="StaffResult">
+        <result property="id"    column="id"    />
+        <result property="staffNo"    column="STAFF_NO"    />
+        <result property="staffName"    column="STAFF_NAME"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="deptId"    column="DEPT_id"    />
+        <result property="deptName"    column="DEPT_NAME"    />
+        <result property="ccId"    column="CC_id"    />
+        <result property="ccName"    column="CC_NAME"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectStaffVo">
+        select id, STAFF_NO, STAFF_NAME, age, sex, DEPT_id, DEPT_NAME, CC_id, CC_NAME, status, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from t_staff
+    </sql>
+	
+    <select id="selectStaffList" parameterType="Staff" resultMap="StaffResult">
+        <include refid="selectStaffVo"/>
+        <where>  
+
+             <if test="staffNo != null  and staffNo != '' "> and STAFF_NO = #{staffNo}</if>
+             <if test="staffName != null  and staffName != '' "> and STAFF_NAME = #{staffName}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
+             <if test="deptId != null  and deptId != '' "> and DEPT_id = #{deptId}</if>
+             <if test="deptName != null  and deptName != '' "> and DEPT_NAME = #{deptName}</if>
+             <if test="ccId != null  and ccId != '' "> and CC_id = #{ccId}</if>
+             <if test="ccName != null  and ccName != '' "> and CC_NAME = #{ccName}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="createBy != null  and createBy != '' "> and CREATE_BY = #{createBy}</if>
+             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+             <if test="updateBy != null  and updateBy != '' "> and UPDATE_BY = #{updateBy}</if>
+             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectStaffById" parameterType="String" resultMap="StaffResult">
+        <include refid="selectStaffVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStaff" parameterType="Staff">
+        insert into t_staff
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="staffNo != null  and staffNo != ''  ">STAFF_NO,</if>
+			<if test="staffName != null  and staffName != ''  ">STAFF_NAME,</if>
+			<if test="age != null  ">age,</if>
+			<if test="sex != null  and sex != ''  ">sex,</if>
+			<if test="deptId != null  and deptId != ''  ">DEPT_id,</if>
+			<if test="deptName != null  and deptName != ''  ">DEPT_NAME,</if>
+			<if test="ccId != null  and ccId != ''  ">CC_id,</if>
+			<if test="ccName != null  and ccName != ''  ">CC_NAME,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="createBy != null  and createBy != ''  ">CREATE_BY,</if>
+			<if test="createTime != null  ">CREATE_TIME,</if>
+			<if test="updateBy != null  and updateBy != ''  ">UPDATE_BY,</if>
+			<if test="updateTime != null  ">UPDATE_TIME,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="staffNo != null  and staffNo != ''  ">#{staffNo},</if>
+			<if test="staffName != null  and staffName != ''  ">#{staffName},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="sex != null  and sex != ''  ">#{sex},</if>
+			<if test="deptId != null  and deptId != ''  ">#{deptId},</if>
+			<if test="deptName != null  and deptName != ''  ">#{deptName},</if>
+			<if test="ccId != null  and ccId != ''  ">#{ccId},</if>
+			<if test="ccName != null  and ccName != ''  ">#{ccName},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="createBy != null  and createBy != ''  ">#{createBy},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateBy != null  and updateBy != ''  ">#{updateBy},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateStaff" parameterType="Staff">
+        update t_staff
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="staffNo != null  and staffNo != ''  ">STAFF_NO = #{staffNo},</if>
+            <if test="staffName != null  and staffName != ''  ">STAFF_NAME = #{staffName},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="sex != null  and sex != ''  ">sex = #{sex},</if>
+            <if test="deptId != null  and deptId != ''  ">DEPT_id = #{deptId},</if>
+            <if test="deptName != null  and deptName != ''  ">DEPT_NAME = #{deptName},</if>
+            <if test="ccId != null  and ccId != ''  ">CC_id = #{ccId},</if>
+            <if test="ccName != null  and ccName != ''  ">CC_NAME = #{ccName},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="createBy != null  and createBy != ''  ">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null  ">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''  ">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null  ">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteStaffById" parameterType="String">
+        delete from t_staff where id = #{id}
+    </delete>
+	
+    <delete id="deleteStaffByIds" parameterType="String">
+        delete from t_staff where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:include="/shop/nav::header"></head>
+	<body>
+		<!------------------------------head------------------------------>
+		<div th:include="/shop/nav :: nav"></div>
+		<!------------------------------banner------------------------------>
+		<div class="banner">
+			<a href="#"><img src="/shop/img/temp/banner2.jpg"/></a>
+		</div>
+		<!-----------------address------------------------------->
+		<div class="address">
+			<div class="wrapper clearfix">
+				<a href="/shop/index">首页</a>
+				<span>/</span>
+				<a href="#">内科</a>
+				<span>/</span>
+				<a href="proList.html" class="on">感冒</a>
+			</div>
+		</div>
+		<!-------------------current---------------------->
+		<div class="current">
+			<div class="wrapper clearfix">
+				<h3 class="fl">感冒</h3> 
+			</div>
+		</div>
+		<!----------------proList------------------------->
+		<ul class="proList wrapper clearfix">
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m1.jpg"></dt>
+						<dd>【999】感冒灵</dd>
+						<dd>￥11.90</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m2.jpg"></dt>
+						<dd>【葵花】六味地黄丸</dd>
+						<dd>￥12.10</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m3.jpg"></dt>
+						<dd>【飞会徽】小儿止咳糖浆</dd>
+						<dd>￥13.90</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m1.jpg"></dt>
+						<dd>【飞会徽】小儿止咳糖浆</dd>
+						<dd>￥13.90</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m1.jpg"></dt>
+						<dd>【999】感冒灵</dd>
+						<dd>￥11.90</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m2.jpg"></dt>
+						<dd>【葵花】六味地黄丸</dd>
+						<dd>￥12.10</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m3.jpg"></dt>
+						<dd>【飞会徽】小儿止咳糖浆</dd>
+						<dd>￥13.90</dd>
+					</dl>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<dl>
+						<dt><img src="/shop/img/temp/m1.jpg"></dt>
+						<dd>【飞会徽】小儿止咳糖浆</dd>
+						<dd>￥13.90</dd>
+					</dl>
+				</a>
+			</li>
+		</ul>
+		<!----------------mask------------------->
+		<div class="mask"></div>
+		<!-------------------mask内容------------------->
+		<div class="proDets">
+			<img class="off" src="/shop/img/temp/off.jpg" />
+			<div class="tit clearfix">
+				<h4 class="fl">【飞会徽】小儿止咳糖浆</h4>
+				<span class="fr">￥13.90</span>
+			</div>
+			<div class="proCon clearfix">
+				<div class="proImg fl">
+					<img class="list" src="/shop/img/temp/m1.jpg"  />
+					<div class="smallImg clearfix">
+						<img src="/shop/img/temp/m1.jpg" data-src="/shop/img/temp/m1.jpg">
+						<img src="/shop/img/temp/m2.jpg" data-src="/shop/img/temp/m2.jpg">
+						<img src="/shop/img/temp/m3.jpg" data-src="/shop/img/temp/m3.jpg">
+						<img src="/shop/img/temp/m1.jpg" data-src="/shop/img/temp/m1.jpg">
+					</div>
+				</div>
+				<div class="fr">
+					<div class="proIntro">
+						<p>分类</p>
+						<div class="smallImg clearfix categ">
+							<p class="fl"><img src="/shop/img/temp/m1.jpg" alt="" data-src="/shop/img/temp/m1.jpg"></p>
+							<p class="fl"><img src="/shop/img/temp/m2.jpg" alt="" data-src="/shop/img/temp/m2.jpg"></p>
+							<p class="fl"><img src="/shop/img/temp/m3.jpg" alt="" data-src="/shop/img/temp/m3.jpg"></p>
+							<p class="fl"><img src="/shop/img/temp/m1.jpg" alt="" data-src="/shop/img/temp/m1.jpg"></p>
+						</div>
+						<p>数量&nbsp;&nbsp;库存<span>2096</span>件</p>
+						<div class="num clearfix">
+							<img class="fl sub" src="/shop/img/temp/sub.jpg">
+							<span class="fl" contentEditable="true">1</span>
+							<img class="fl add" src="/shop/img/temp/add.jpg">
+							<p class="please fl">请选择商品属性!</p>
+						</div>
+					</div>
+					<div class="btns clearfix">
+						<a href="#2"><p class="buy fl">立即购买</p></a>
+					</div>
+				</div>
+			</div>
+			<a class="more" href="#">查看更多细节</a>
+		</div>
+
+		<div th:include="/shop/nav :: footer"></div>
+	</body>
+</html>

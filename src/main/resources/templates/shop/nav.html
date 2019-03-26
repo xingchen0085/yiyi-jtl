@@ -1,0 +1,132 @@
+<div th:fragment="header">
+    <head lang="en">
+        <meta charset="utf-8" />
+        <title>易医</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/public.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/proList.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/login.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/forget.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/mygxin.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/mygrxx.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/shop/css/myorder.css}" />
+    </head>
+</div>
+
+<div th:fragment="nav">
+    <div class="head">
+        <div class="wrapper clearfix">
+            <div class="clearfix" id="top">
+                <h1 class="fl"><a href="/shop/index"><img src="/shop/img/logo.png"/></a></h1>
+                <div class="fr clearfix" id="top1">
+                    <p class="fl">
+                        <a href="/shop/login" id="login">登录</a>
+                        <a href="/shop/reg" id="reg">注册</a>
+                        <a href="/shop/guahao" id="guahao">预约挂号</a>
+                    </p>
+                    <form action="#" method="get" class="fl">
+                        <input type="text" placeholder="搜索" />
+                        <input type="button" />
+                    </form>
+                    <div class="btn fl clearfix">
+                        <a href="/shop/mygrxx"><img src="/shop/img/grzx.png"/></a>
+                        <p><a href="#"><img src="/shop/img/smewm.png"/></a></p>
+                    </div>
+                </div>
+            </div>
+            <ul class="clearfix" id="bott">
+                <li><a href="/shop/index">首页</a></li>
+                <li>
+                    <a href="#">所有药品</a>
+                </li>
+                <li>
+                    <a href="/shop/">内科</a>
+                    <div class="sList2">
+                        <div class="clearfix">
+                            <a href="#">感冒</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">感冒</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">肺炎</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="flowerDer.html">皮肤科</a>
+                    <div class="sList2">
+                        <div class="clearfix">
+                            <a href="#">感冒</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">感冒</a>
+                            <a href="#">肺炎</a>
+                            <a href="#">肺炎</a>
+                        </div>
+                    </div>
+                </li><li>
+                <a href="flowerDer.html">外科</a>
+                <div class="sList2">
+                    <div class="clearfix">
+                        <a href="#">感冒</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">感冒</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">肺炎</a>
+                    </div>
+                </div>
+            </li><li>
+                <a href="flowerDer.html">中医科</a>
+                <div class="sList2">
+                    <div class="clearfix">
+                        <a href="#">感冒</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">感冒</a>
+                        <a href="#">肺炎</a>
+                        <a href="#">肺炎</a>
+                    </div>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <!--返回顶部-->
+    <div class="gotop">
+        <a href="/shop/mygrxx">
+            <dl>
+                <dt><img src="/shop/img/gt3.png"/></dt>
+                <dd>个人<br />中心</dd>
+            </dl>
+        </a>
+        <a href="#" class="dh">
+            <dl>
+                <dt><img src="/shop/img/gt2.png"/></dt>
+                <dd>联系<br />客服</dd>
+            </dl>
+        </a>
+
+        <a href="#" class="toptop" style="display: none;">
+            <dl>
+                <dt><img src="/shop/img/gt4.png"/></dt>
+                <dd>返回<br />顶部</dd>
+            </dl>
+        </a>
+        <p>123-456-7890</p>
+    </div>
+    <div class="msk"></div>
+    <!--footer-->
+    <div class="footer">
+        <p class="dibu">易医&copy;2018-2019版权所有<br /></p>
+    </div>
+    <script th:src="@{/shop/js/jquery-1.12.4.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/public.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/nav.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/pro.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/user.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/jquery.SuperSlide.2.1.1.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/shop/js/cart.js}" type="text/javascript" charset="utf-8"></script>
+</div>
